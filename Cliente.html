@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+<body> 
+<p>
+	<center>
+<H1>Ingrese datos del nuevo cliente</H1>
+</center>
+<link rel="stylesheet" href="estilos.css">
+<script type="text/javascript">
+function validar() {
+	var Nombre = document.forms['formulario']['Nombre'].value;
+	var Domicilio = document.forms['formulario']['Domicilio'].value;
+	var Servicio = document.forms['formulario']['Servicio'].value;
+	var Costo = document.forms['formulario']['Costo'].value;
+	var Periodo = document.forms['formulario']['Periodo'].value;
+
+		var mensaje = "";
+
+if (Nombre == "") {mensaje += "El campo 1 esta vacio\n";}
+if (Domicilio == "") {mensaje += "El campo 2 esta vacio\n";}
+if (Servicio == "") {mensaje += "El campo 3 esta vacio\n";}
+if (Costo == "") {mensaje += "El campo 4 esta vacio\n";}
+if (Periodo == "") {mensaje += "El campo 5 esta vacio\n";}
+
+	if (mensaje !=="") {
+		alert (mensaje);
+		return false;
+	} else {
+		alert ("Todos los campos son correctos");
+		return true;
+	}
+}
+</script>
+<center>
+<form REQUIRED name ="formulario" action="signu.php" onsubmit= "return validar()"method="post">
+	<label>Nombre completo</label>
+<input REQUIRED name="Nombre" type="text" maxlength="100" placeholder="Nombre completo " minlength="10">
+<label>Domicilio</label>
+<input REQUIRED name="Domicilio" type="text" maxlength="200" placeholder="Domicilio completo">
+<label>Tipo de servicio</label>
+<div class="aa">
+<select id="Servicio" name="Servicio">
+	<option>Pre pago</option>
+	<option>Pospago</option>
+</select>
+</div>
+<label>Costo mensual</label>
+<input REQUIRED type="text" name="Costo" maxlength="10" placeholder="$ Costo" min="50" pattern="[0-9]+">
+<label>Dia Mes y Año</label>
+<input REQUIRED name="Periodo" type="date" placeholder="Fecha de cortes" min="2020-01-01">
+<input type="Submit" name="enviar" value="Enviar">
+
+</center>
+
+ </form>
+ </body>
+ </html>

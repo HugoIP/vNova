@@ -1,0 +1,290 @@
+ html {
+   position: relative;
+  min-height: 95%;
+	background: #e8e8e8;
+ }
+
+ .menu{
+	list-style: none;
+	padding: 0;
+	background: #310606;
+	width: 90%;
+	max-width: 1000px;
+	margin: auto;
+ }
+
+ .menu li a{
+	text-decoration: none;
+	color: white;
+	padding: 15px;
+	display: block;
+ }
+
+ .menu li{
+	display: inline-block;
+	text-align: center;
+ }
+
+ .menu li a:hover{
+	background: rgb(240, 138, 138) ;
+ }
+
+
+ .menuu{
+	list-style: none;
+	padding: 0;
+	width: 90%;
+	max-width: 1000px;
+	margin: auto;
+	text-align: right;
+
+ }
+
+ .menuu li a{
+	text-decoration: none;
+	color: white;
+	background:#c4153b ;
+	padding: 10px;
+	display: block;
+	max-width: 250px;
+ }
+
+ .menuu li{
+	display: inline-block;
+	text-align: center;
+ }
+
+ .menuu li a:hover{
+	background: #f35c5c;
+ }
+
+
+ .menuuu{
+	list-style: none;
+	padding: 0;
+	width: 90%;
+	max-width: 1000px;
+	margin: auto;
+	text-align: center;	
+ }
+
+ .menuuu li a{
+	text-decoration: none;
+	color: white;
+	padding: 15px;
+	display: block;
+	max-width: 250px;
+	text-align: center;	
+	background: #3f0606 ;
+ }
+
+  .menuuu li{
+	display: inline-block;
+	text-align: center;
+ }
+
+  .menuuu li a:hover{
+	background: rgb(179, 47, 47);
+    }
+        * {
+			padding: 0px;
+			margin: 0px;
+			font-family: Arial;
+  min-height: 98%;
+			  position: relative;
+
+		}
+		#header{
+			margin: 0;
+		    font-family: Arial; 
+		}
+		.navv{
+
+			width: 80%;
+			background: #000;
+			list-style: none;
+			padding: 0; 
+			margin: 0;
+			text-align: center;
+		}
+		.na {
+         font-size: 20px;
+         padding: 10px;
+		}
+		.nav li {
+			display:inline-block;
+		}
+		.nav li a{
+			padding: 25px 40px;
+			display: inline-block;
+			color: #fff;
+			 	font-size: 25px;
+		}
+
+body{
+
+	font-family: Arial;
+}
+
+
+ h1{
+ 	font-size: 45px;
+text-align: center;
+padding: 10px;
+ }
+ 				h3{
+            background: #C0C0C0;
+			width: 40%;
+			margin: 5;
+			text-align: center;
+			padding: 20px;
+			display: inline-block;
+			
+			font-size: 25px;
+		}
+  h2{
+ 	font-size: 45px;
+text-align: center;
+padding: 10px;
+ }
+   h4{
+ 	font-size: 60px;
+text-align: center;
+padding: 10px;
+ }
+    h5{
+ 	font-size: 25px;
+padding: 10px;
+background: yellow;
+width: 20%;
+ }
+     h6{
+ 	font-size: 20px;
+padding: 10px;
+width: 20%;
+ }
+table {
+	margin: 2px;
+	font-family: Arial;
+	background-color: white;
+	text-align: left;
+	width: 80% 
+}
+th, td{
+	padding: 20px;
+}
+th{
+	background-color: #246355; 
+}
+tr:nth-child(even){
+	background-color: #ddd;
+}
+tr:hover{
+	background-color: #369681;
+}
+p {
+	font-size: 25px;
+	text-align: center;
+padding: 10px;
+width: 99%;
+font-family: Arial;
+}
+a{
+	width: 100%;
+	font-size: 25px;
+}
+form{
+width: 90%;
+padding: 1px;
+}
+label {
+	font-size: 25px;
+	display: block;
+	padding: 2px;
+	font-family: Arial;
+}
+input, textarea {
+padding: 2px;
+}
+input[type="Email"]{
+	width: 30%;
+}
+input[type="text"], input[type="password"],input[type="number"],input[type="date"],input[type="int"]{
+  outline: none;
+  padding: 12px;
+  display: block;
+  width: 350px;
+  border-radius: 3px;
+  border: 5px solid #eee;
+  margin: 5px auto;
+font-family: Arial;
+font-size: 20px;
+}
+input[type="submit"]{
+  padding: 12px;
+  color: #fff;
+  background: #0098cb;
+  width: 200px;
+  margin: 20px auto;
+  margin-top: 0;
+  border: 8;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: Arial;
+  font-size: 15px;
+}
+input[type="tex"]{
+  outline: none;
+  padding: 0px;
+  display: block;
+  width: 0px;
+  border-radius: 0px;
+  border: 0px solid #eee;
+  margin: 0px auto;
+font-family: Arial;
+font-size: 0px;
+}
+.aa select {
+  outline: none;
+  padding: 12px;
+  display: block;
+  width: 350px;
+  border-radius: 3px;
+  border: 5px solid #eee;
+  margin: 5px auto;
+font-family: Arial;
+font-size: 20px;
+}
+
+input[type="submit"]:hover {
+  background-color: #00b8eb;
+}
+		.navv{
+			width: 70%;
+			list-style: none;
+			padding: 0; 
+			margin: 0;
+		}
+		.navv li {
+			display:inline-block;
+		}
+		.navv li a{
+			padding: 20px 40px;
+			display: inline-block;
+			color: red;
+			 	font-size: 25px;
+		}
+		.menuuuu{
+			list-style: none;
+			padding: 0;
+			font-size: 30px;
+		 }
+		
+		 .menuuuu li a{
+			text-decoration: none;
+			padding: 15px;
+			display: block;
+			max-width: 250px;;
+		 }
+		
+		
