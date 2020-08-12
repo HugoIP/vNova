@@ -1,5 +1,5 @@
 <?php
-  require 'sesion.php';
+  require 'sesion2.php';
   ?>
 <?php
 
@@ -42,9 +42,6 @@ mysqli_close($link);
 
 //mysqli_query($link,"INSERT INTO usersss (Nombre, Domicilio, Servicio, Costo, Periodo) VALUES('$Nombre','$Domicilio','$Servicio','$Costo','$Periodo')");
 
-
-
-
 ?>
 <!doctype html>
 <html>
@@ -72,22 +69,13 @@ $("#principal").load(pagina);
 </header>
 <body> 
 	<header>
-	 <ul class="menuuu">
-	<li><a href="Cobro2.html">Cobrar Servicio</a></li>
-</ul>
-<br>
-<div class="contenedor">
 
 <ul class="menu">
- 	<li><a onClick="cargarContenido('Cliente.html')" href="#"> Registrar Cliente</a></li>
-	<li><a onClick="cargarContenido('signup2.php')" href="#">Registrar Usuario</a></li>
-	<li><a href="Registros.php">Ver Clientes</a></li>
-	<li><a href="Cobro22.html">Historial</a></li>
-	<li><a href="Cobro222.html">Prepago</a></li>
+<li><a href="Cobro21.html">Cobrar Servicio</a></li>
+
+	<li><a href="Cobro2221.html">Prepago</a></li>
 </ul>
 
-</div>
-	<div id= "principal" class="contenedor">
 
 </header>
 

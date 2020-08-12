@@ -9,8 +9,19 @@
     $message = '';
 
     if (($results) > 0 && password_verify($_POST['password'], $results['password'])) {
-      $_SESSION['user_id'] = $results['id'];
-       header("Location: validar.php");
+      $_SESSION['user_id'] = $results['id'];   
+      $email=$_POST['email'];
+      $password=$_POST['password'];
+      $daniel = 'daniel';
+      $monica = 'monica';
+      $hugo = 'hugo';
+
+      if ($daniel === $email || $monica === $email || $hugo === $email) {
+      header("Location: validar.php");
+
+      } else {
+      header("Location: validar2.php");
+      }
     } else {
       $message = 'Usuario o contraseña incorrecta';
     }

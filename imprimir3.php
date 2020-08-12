@@ -38,7 +38,6 @@ function Header()
     $this->Cell(30,10,'Tel: 01(XXX)XXXXXXX',0,0,'C');
 
     $this->Cell(55);
-   
     date_default_timezone_set('America/Mexico_City');
     $actual = date("d - m - Y");
     $actua = date("h:i:s A");
@@ -62,11 +61,9 @@ function Footer()
     // Número de página
 }
 }
-$daniel=$_POST['costo'];
-$dan=$_POST['dan'];
-$id=$dan;
-$dani=$daniel;
-$consulta = "SELECT * FROM usersss where id = '$id'";
+$dani=$_POST['dani'];
+$id=$dani;
+$consulta = "SELECT * FROM prepago where id = '$id'";
 $resultado = mysqli_query($link, $consulta);
 
 $pdf = new PDF();
@@ -77,32 +74,64 @@ $pdf->SetDrawColor(0,0,0);
 $pdf->SetLineWidth(1);
 $pdf->Line(10,57,200,57);
  
-while ($extraido=mysqli_fetch_array($resultado)) 
-{
+ while ($extraido=mysqli_fetch_array($resultado)) 
+ {
 
-$extraido['id'];
-$extraido['Nombre'];
-$extraido['Domicilio'];
-$extraido['Servicio'];
-$extraido['Costo'];
-$extraido['Periodo'];
-$Nombre=$extraido['Nombre'];
-$Domicilio=$extraido['Domicilio'];
-$Servicio=$extraido['Servicio'];  
-$Costo=$extraido['Costo'];
-$Periodo=$extraido['Periodo'];	
+ $extraido['id'];
+ $extraido['Nombre'];
+ $extraido['Domicilio'];
+ $extraido['Numero'];
+ $extraido['Servicio'];
+ $extraido['Costo'];
+ $extraido['Periodo'];
+ $Nombre=$extraido['Nombre'];
+ $Domicilio=$extraido['Domicilio'];
+ $Numero=$extraido['Numero'];
+ $Servicio=$extraido['Servicio'];  
+ $Costo=$extraido['Costo'];
+ $Periodo=$extraido['Periodo'];	
 
-$fecha1 = $extraido['Periodo'];
-$fecha2 = strtotime ( '-1 month',strtotime ( $fecha1 ) ) ;
-$fecha2 = date ('Y-m-d' , $fecha2);
+ $dan = $Costo=$extraido['Costo'];
 
-$date1 = date_create($fecha2);
-$date2 = date_create($fecha1);
-$diff = $date1->diff($date2);
+ $fecha1 = $extraido['Periodo'];
 
-$extraid = $extraido['Costo'];
+ $extraid = $extraido['Costo'];
+ date_default_timezone_set('America/Mexico_City');
+ $fech = date("Y-m-d");
 
-$total = $dani - $extraid;
+ if ($fech >= $fecha1) {
+    
+    $fecha2 = strtotime ( '+1 month',strtotime ( $fech ) ) ;
+    $fecha2 = date ('Y-m-d' , $fecha2);
+    $fe=$fech;
+ $date1 = date_create($fecha2);
+ $date2 = date_create($fech);
+ $diff = $date1->diff($date2);
+
+ $fec = strtotime ( '+1 month',strtotime ( $fech ) ) ;
+ $fec = date ('Y-m-d' , $fec);
+ 
+ $primero = $extraido['Periodo'];
+ $segundo = strtotime ( '+1 month',strtotime ( $primero ) ) ;
+ $segundo = date ('Y-m-d' , $segundo);
+ } else {
+
+    $fecha2 = strtotime ( '+1 month',strtotime ( $fecha1 ) ) ;
+    $fecha2 = date ('Y-m-d' , $fecha2);
+$fe = $fecha1;
+ $date1 = date_create($fecha2);
+ $date2 = date_create($fe);
+ $diff = $date1->diff($date2);
+
+ $fec = strtotime ( '+1 month',strtotime ( $fech ) ) ;
+ $fec = date ('Y-m-d' , $fec);
+ 
+ $primero = $extraido['Periodo'];
+ $segundo = strtotime ( '+1 month',strtotime ( $primero ) ) ;
+ $segundo = date ('Y-m-d' , $segundo);
+ } 
+
+ $total = $dani - $extraid;
 
 
      $pdf->SetTextColor(255, 255, 255);
@@ -139,9 +168,9 @@ $pdf->Cell(40,10, $extraido['Servicio'], 0 , 0 , 'C' , 0);
 
    $pdf->SetFont('Arial','B',8);
    $pdf->Cell(20);
-$pdf->Cell(15,10, $fecha2, 0 , 0 , 'D' , 0);
+$pdf->Cell(15,10, $fe, 0 , 0 , 'D' , 0);
 $pdf->Cell(3,10, ' - ', 0 , 0 , 'D' , 0);
-$pdf->Cell(12,10, $extraido['Periodo'], 0 , 0 , 'D' , 0);
+$pdf->Cell(12,10, $fecha2, 0 , 0 , 'D' , 0);
 
    $pdf->Ln(9);
 
@@ -156,7 +185,7 @@ $pdf->Cell(12,10, $extraido['Periodo'], 0 , 0 , 'D' , 0);
 
        $pdf->SetFont('Arial','B',9);
     $pdf->Cell(25);
-   $pdf->Cell(30,10,'Dias transcurridos',0,0,'D');
+   $pdf->Cell(30,10,'Dias a transcurrir',0,0,'D');
 
    $pdf->Ln(7);
 
@@ -175,17 +204,6 @@ $pdf->Cell(25,10, $diff->format("%a dias"), 0 , 0 , 'C' , 0);
 
 $pdf->Ln(8);
 
-     $pdf->SetTextColor(128);
-       $pdf->SetFont('Arial','B',9);
-    $pdf->Cell(135);
-   $pdf->Cell(30,10,'Ajustes ',0,0,'D');
-
-
-     $pdf->SetTextColor(0,0,0);
-   $pdf->SetFont('Arial','B',10);
-    $pdf->Cell(2);
-$pdf->Cell(2,10,"$ $total ", 0 , 0 , 'D' , 0);
-
 $pdf->Ln(8);
 
      $pdf->SetTextColor(128);
@@ -195,10 +213,12 @@ $pdf->Ln(8);
 
      $pdf->SetTextColor(0,0,0);
    $pdf->SetFont('Arial','B',10);
-    $pdf->Cell(2);
-$pdf->Cell(2,10,"$ $dani", 0 , 0 , 'D' , 0);
+    $pdf->Cell(1);
+$pdf->Cell(1,10,"$ $dan", 0 , 0 , 'D' , 0);
 
 $pdf->Ln(40);
+
+mysqli_query($link,"UPDATE prepago set Nombre='$Nombre', Domicilio='$Domicilio', Numero='$Numero', Servicio='$Servicio', Costo='$Costo', Periodo='$fecha2' where id='$id'");
 
 }
 
@@ -220,7 +240,6 @@ $pdf->Cell(110,3,utf8_decode("Le recordamos que en nuestra pagina de internet po
 $pdf->SetFont('Arial','B',8);
 $pdf->Cell(110,3,utf8_decode("vnova.santacatarinavillanueva.com"), 0 , 0 , 'D' , 0);
 
-
 $pdf->SetDrawColor(128);
 $pdf->SetLineWidth(1);
 $pdf->Line(25,145,170,145);
@@ -228,15 +247,7 @@ $pdf->Line(24,145,24,170);
 $pdf->Line(170,145,170,170);
 $pdf->Line(25,170,170,170);
 
-
 $pdf->Output();
-
-date_default_timezone_set('America/Mexico_City');
-$fech = date("Y-m-d");
-
-mysqli_query($link,"INSERT INTO userssss (id, Nombre, Domicilio, Servicio, cost, Costo, Periodo) VALUES('$fech','$Nombre','$Domicilio','$Servicio','$extraid','$dani','$Periodo')");
-
-mysqli_query($link,"DELETE from usersss where id= '$id'") 
 
 
 ?>

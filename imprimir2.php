@@ -38,13 +38,17 @@ function Header()
     $this->Cell(30,10,'Tel: 01(XXX)XXXXXXX',0,0,'C');
 
     $this->Cell(50);
+
     $this->SetFont('Arial','B',12); 
     $this->SetTextColor(252, 61, 8);
     date_default_timezone_set('America/Mexico_City');
     $actual = date("d - m - Y");
     $this->Cell(15,10,'Copia:', 0 , 0 , 'I');
     $this->Cell(20,10, $actual, 0 , 0 , 'I');
-
+    $actua = date("h:i:s A");
+    $this->Cell(1);
+    $this->SetFont('Arial','B',6);
+    $this->Cell(-10,15, $actua , 0 , 0 , 'C');
 
     // Salto de línea  
     $this->Ln(20);

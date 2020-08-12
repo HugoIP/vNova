@@ -1,5 +1,5 @@
 <?php
-  require 'sesion.php';
+  require 'sesion2.php';
   ?>
 <!DOCTYPE html>
 <html>
@@ -22,7 +22,7 @@ $salida = "";
     	$q = $link->real_escape_string($_POST['consulta']);
     	$query = "SELECT id, Nombre, Domicilio, Servicio, Costo, Periodo FROM usersss WHERE Nombre LIKE '%".$q."%' OR Domicilio LIKE '%".$q."%' OR Servicio LIKE '%".$q."%' OR Costo LIKE '%".$q."%' OR Periodo LIKE '%".$q."%'";
     }
-$a = 'href="Inicio.php"';
+$a = 'href="Inicioo.php"';
     $resultado = $link -> query($query);
  
     if ($resultado->num_rows > 0) { 
@@ -51,7 +51,7 @@ $a = 'href="Inicio.php"';
     					<td>".$fila['Costo']."</td>
 						<td>".$fila['Periodo']."</td>
 						
-	 <td>".'<form name ="formulario" action="Cobro.php" method="post"> 
+	 <td>".'<form name ="formulario" action="Cobro1.php" method="post"> 
 	 <input name="dani" id="dani" type="tex" readonly= "readonly" value= '.$fila["id"].'> 
 	 <input type="Submit" name="enviar" value="Cobrar"></form>'."</td>
 

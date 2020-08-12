@@ -12,9 +12,15 @@
 <center>
 <label>Nombre completo</label>
 <form name ="formulario" action="Eliminar.php" onsubmit= "return validar()"method="post">
-<input REQUIRED name="nombre" type="text" maxlength="100" placeholder="Nombre completo ">
-
-<input type="Submit" name="enviar" value="Eliminar">
+<input REQUIRED name="Nombre" type="text" maxlength="100" placeholder="Nombre completo ">
+<label>Tipo de servicio</label>
+<div class="aa">
+<select id="Servicio" name="Servicio">
+	<option>Pre pago</option>
+	<option>Pospago</option>
+</select>
+</div>
+<input type="Submit" value="Eliminar">
 </form>
 </center>
 </body>

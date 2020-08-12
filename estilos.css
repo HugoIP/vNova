@@ -1,6 +1,6 @@
  html {
    position: relative;
-  min-height: 95%;
+  min-height: 90%;
 	background: #e8e8e8;
  }
 
@@ -169,19 +169,27 @@ table {
 	background-color: white;
 	text-align: left;
 	width: 80% 
+	
 }
 th, td{
 	padding: 20px;
+
 }
 th{
-	background-color: #246355; 
+	background-color: #275a4f; 
+	color: white;
+	font-size: 20px;
+}
+tr{
+	font-size: 20px;
 }
 tr:nth-child(even){
 	background-color: #ddd;
 }
 tr:hover{
-	background-color: #369681;
+	background-color: #438576;
 }
+
 p {
 	font-size: 25px;
 	text-align: center;
@@ -233,6 +241,29 @@ input[type="submit"]{
   font-family: Arial;
   font-size: 15px;
 }
+input[name="enviar"]{
+	padding: 5px;
+	color: #fff;
+	background: #0098cb;
+	width: 100px;
+	margin: 10px auto;
+	margin-top: 0;
+	border: 8;
+	border-radius: 3px;
+	cursor: pointer;
+	font-family: Arial;
+	font-size: 15px;
+  }
+input[type="color"]{
+	padding: 2px;
+    color: #fff;
+	width: 90px;
+	height: 30px;
+	margin: 0px;
+	margin: 10px auto;
+	margin-top: 0px;
+  font-size: 30px;
+  }
 input[type="tex"]{
   outline: none;
   padding: 0px;
@@ -244,6 +275,7 @@ input[type="tex"]{
 font-family: Arial;
 font-size: 0px;
 }
+
 .aa select {
   outline: none;
   padding: 12px;

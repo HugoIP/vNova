@@ -44,7 +44,7 @@
       <input REQUIRED name="email" type="text" placeholder="Email o Usuario">
     </br>
   <label>Ingrese contraceña</label>
-      <input REQUIRED id="password" name="password" type="text" placeholder="Ingrese contraceña" maxlength="20" minlength="8" ">
+      <input REQUIRED id="password" name="password" type="password" placeholder="Ingrese contraceña" maxlength="20" minlength="8" ">
       <input type="submit" value="Enviar">
     </form>
     <ul class="menuuuu">

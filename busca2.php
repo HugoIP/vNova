@@ -13,8 +13,6 @@
 <?php
 require 'conexion.php';
 
-
-
     $salida = "";
 
     $query = "SELECT * FROM userssss ORDER By id";
@@ -22,7 +20,12 @@ require 'conexion.php';
     if (isset($_POST['consulta'])) {
     	$q = $link->real_escape_string($_POST['consulta']);
     	$query = "SELECT id, nombre, domicilio, servicio, cost, costo, periodo FROM userssss WHERE Nombre LIKE '%".$q."%' OR Domicilio LIKE '%".$q."%' OR Servicio LIKE '%".$q."%' OR cost LIKE '%".$q."%' OR Costo LIKE '%".$q."%' OR Periodo LIKE '%".$q."%'";
-    }
+	}
+
+	if ($q == null || $q='') {
+
+	}else {
+	
 $a = 'href="Inicio.php"';
     $resultado = $link -> query($query);
  
@@ -57,13 +60,17 @@ $a = 'href="Inicio.php"';
 
     				</tr>";
 
-    	}
+		}
+		
      	$salida.="</tbody></table>";
     }else{
     	$salida.="No se encontro el cliente";
-    }
+	}
+
     echo $salida;
     $link->close();
+
+	}
 
 ?>
 

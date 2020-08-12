@@ -24,6 +24,13 @@ $("#principal").load(pagina);
 <ul class="menuuu">
 	<li><a href="Inicio.php">Regresar</a></li>
 </ul>
+<div class="contenedor">	
+	
+    <ul class="menu">
+	<li><a onClick="cargarContenido('modificar.html')" href="#">Modificar Cliente</a></li>
+	<li><a onClick="cargarContenido('Eliminarr.html')" href="#">  Eliminar Cliente</a></li>
+</ul>
+</div>
 <center>
 <p>
 <?php
@@ -31,12 +38,17 @@ $("#principal").load(pagina);
 require 'conexion.php';
 
 $consulta = mysqli_query($link,"SELECT * from userss") or die ("<h2>Error de ver datos </h2>");
+echo '<table border="2">';
+echo '<tr>';
+echo '<th id="id">Clientes de Pospago</th>';
+echo '</tr>';
 
 echo '<table border="5">';
 echo '<tr>';
 echo '<th id="id">ID</th>';
 echo '<th id="Nombre">Nombre completo</th>';
 echo '<th id="Domicilio">Domicilio</th>';
+echo '<th id="Numero">Numero</th>';
 echo '<th id="Servicio">Tipo de Servicio</th>';
 echo '<th id="Costo">Costo</th>';
 echo '<th id="Periodo">Fecha de corte</th>';
@@ -48,6 +60,40 @@ while ($extraido = mysqli_fetch_array($consulta))
 	echo "<td>".$extraido['id'].'</td>';
 	echo "<td>".$extraido['Nombre'].'</td>';
 	echo "<td>".$extraido['Domicilio'].'</td>';
+	echo "<td>".$extraido['Numero'].'</td>';
+	echo "<td>".$extraido['Servicio'].'</td>';
+	echo "<td>".$extraido['Costo'].'</td>';
+	echo "<td>".$extraido['Periodo'].'</td>';
+	echo "</tr>";
+}
+echo '</table>';
+echo "</br>";
+
+$consulta = mysqli_query($link,"SELECT * from prepago") or die ("<h2>Error de ver datos </h2>");
+
+echo '<table border="2">';
+echo '<tr>';
+echo '<th id="id">Clientes de Pre pago</th>';
+echo '</tr>';
+
+echo '<table border="5">';
+echo '<tr>';
+echo '<th id="id">ID</th>';
+echo '<th id="Nombre">Nombre completo</th>';
+echo '<th id="Domicilio">Domicilio</th>';
+echo '<th id="Numero">Numero</th>';
+echo '<th id="Servicio">Tipo de Servicio</th>';
+echo '<th id="Costo">Costo</th>';
+echo '<th id="Periodo">Fecha de corte</th>';
+echo '</tr>';
+
+while ($extraido = mysqli_fetch_array($consulta))
+{
+	echo "<tr>";
+	echo "<td>".$extraido['id'].'</td>';
+	echo "<td>".$extraido['Nombre'].'</td>';
+	echo "<td>".$extraido['Domicilio'].'</td>';
+	echo "<td>".$extraido['Numero'].'</td>';
 	echo "<td>".$extraido['Servicio'].'</td>';
 	echo "<td>".$extraido['Costo'].'</td>';
 	echo "<td>".$extraido['Periodo'].'</td>';
@@ -59,13 +105,7 @@ echo '</table>';
 </p>
 </center>
 
-<div class="contenedor">	
-	
-    <ul class="menu">
-	<li><a onClick="cargarContenido('modificar.html')" href="#">Modificar Cliente</a></li>
-	<li><a onClick="cargarContenido('Eliminarr.html')" href="#">  Eliminar Cliente</a></li>
-</ul>
-</div>
+
 
 </header>
 	<div id= "principal" class="contenedor">

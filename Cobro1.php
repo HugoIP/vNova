@@ -1,5 +1,5 @@
 <?php
-  require 'sesion.php';
+  require 'sesion2.php';
   ?>
 <!doctype html>
 <html lang="es">
@@ -11,7 +11,7 @@
 <body>
 <br><br>
 <ul class="menuu">
-	<li><a href="Cobro2.html">Regresar</a></li>
+	<li><a href="Cobro21.html">Regresar</a></li>
 </ul> 
 <p>
 <?php
@@ -46,7 +46,7 @@ $daniel = $extraido['Costo'];
 <input name="dan" id="dan" type="tex" readonly= "readonly" maxlength="100" placeholder=" ID" value=" <?php echo $dani; ?>">
 	<label>Costo mensual</label>
 
-<input name=" costo" type="text" maxlength="5" pattern="[0-9]+" placeholder="Costo" value=" <?php echo $daniel;?>"> 
+<input name=" costo" type="text" readonly= "readonly" maxlength="5" pattern="[0-9]+" placeholder="Costo" value=" <?php echo $daniel;?>"> 
 	<label>   </label>
 	<label>   </label>
 	<label>   </label>
