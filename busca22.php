@@ -1,12 +1,28 @@
+<?php
+ error_reporting(0);
+  ?>
 <!DOCTYPE html>
 <html>
 <script src="prepago.js" ></script>
 <head>
-    <title></title>
+	<title></title>
+
 </head>
 <body>
     <script src="jquery.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript">
+function validar() {
+
+var respuesta = confirm("Seguro que desea cobrar este recibo");
+if(respuesta === true){
+	return true;
+}else{
+	return false;
+}
+
+}
+</script>
 <p>
 <?php
 require 'conexion.php';
@@ -15,12 +31,13 @@ require 'conexion.php';
 
     $salida = "";
 
-    $query = "SELECT * FROM prepago ORDER By id";
+    $query = "SELECT * FROM datoss a INNER JOIN datt b on a . id = b . aid";
  
     if (isset($_POST['consulta'])) {
     	$q = $link->real_escape_string($_POST['consulta']);
-    	$query = "SELECT id, Nombre, Domicilio, Numero, Servicio, Costo, Periodo FROM prepago WHERE Nombre LIKE '%".$q."%' OR Domicilio LIKE '%".$q."%' OR Numero LIKE '%".$q."%' OR Servicio LIKE '%".$q."%' OR Costo LIKE '%".$q."%' OR Periodo LIKE '%".$q."%'";
-    }
+     $query = "SELECT * FROM datoss a INNER JOIN datt b on a . id = b . aid WHERE nombre LIKE '%".$q."%' OR paterno LIKE '%".$q."%' OR materno LIKE '%".$q."%' OR domicilio LIKE '%".$q."%' OR numero LIKE '%".$q."%' OR costo LIKE '%".$q."%' OR periodo LIKE '%".$q."%' ORDER By periodo ASC";
+   
+	}
           $a = 'href="Inicio.php"';
     $resultado = $link -> query($query);
  
@@ -29,12 +46,14 @@ require 'conexion.php';
     			<thead>
     				<tr>
                         <th>ID</th>
-    					<th>Nombre</th>
+    					<th>Nombre</th>    
+    					<th>Paterno</th>
+    					<th>Materno</th>
     					<th>Domicilio</th>
     					<th>Numero</th>
     					<th>Servicio</th>
-    					<th>Costo de servicio</th>
-    					<th>Fecha de pago</th>
+    					<th>Costo</th>
+    					<th>Fecha</th>
                         <th>Cobrar un mes</th>
                         <th>Estado</th>
     				</tr>
@@ -42,39 +61,44 @@ require 'conexion.php';
     	<tbody>";
 
     	while ($fila = $resultado->fetch_assoc()) {
-	  $fila ['Periodo'];
-	  $uno =  $fila ['Periodo'];
+	  $fila ['periodo'];
+	  $uno =  $fila ['periodo'];
 	  $dos = strtotime ( '+1 month',strtotime ( $uno ) ) ;
 	  $dos = date ('Y-m-d' , $dos);
 	  date_default_timezone_set('America/Mexico_City');
 	  $actual = date("Y-m-d");
-
+	  $Servicio= "Pre pago"; 
 	  if ($actual > $uno) {
 	 $tres = '<input type="color" value="#ff0000">';
-	 $contenido = "Nombre del cliente: " .$Nombre . "\n Domicilio: ".$Domicilio."\n Numero: ".$Numero."\n Tipo de Servicio: ".$Servicio."\n Costo: ".$Costo."\n Fecha de pago: ".$Periodo;
-	 mail("dannn-pl@hotmail.com", "Recordatorio se genero recibo",$contenido); 
+	$contenido = "Nombre del cliente: " .$fila['nombre']." ".$fila['paterno']." ".$fila['materno']. "\n Domicilio: ".$fila['domicilio']."\n Numero: ".$fila['numero']."\n Tipo de Servicio: ".$Servicio."\n Costo: ".$fila['costo']."\n Fecha de pago: ".$fila['periodo'];
+	 mail("dannn-pl@hotmail.com", "Recordatorio de servicio vencido",$contenido); 
 	  }
 	  	  if ($actual === $uno) {
 			$tres = '<input type="color" value="#FF9C33">';
+	$contenido = "Nombre del cliente: " .$fila['nombre']." ".$fila['paterno']." ".$fila['materno']. "\n Domicilio: ".$fila['domicilio']."\n Numero: ".$fila['numero']."\n Tipo de Servicio: ".$Servicio."\n Costo: ".$fila['costo']."\n Fecha de pago: ".$fila['periodo'];
+	 mail("dannn-pl@hotmail.com", "Recordatorio hoy vence su servicio",$contenido); 
 			}
 			if ($actual < $uno) {
 				$tres = '<input type="color" value="#4BFF33">';
 			}
 
 			$salida.="<tr>
-                        <td>".$fila['id']."</td>
-    					<td>".$fila['Nombre']."</td>
-    					<td>".$fila['Domicilio']."</td>
-    					<td>".$fila['Numero']."</td>
-    					<td>".$fila['Servicio']."</td>
-    					<td>".$fila['Costo']."</td>
-						<td>".$fila['Periodo']."</td>
+                        <td>".$fila['aid']."</td>
+						<td>".$fila['nombre']."</td>
+						<td>".$fila['paterno']."</td>
+    					<td>".$fila['materno']."</td>
+    					<td>".$fila['domicilio']."</td>
+    					<td>".$fila['numero']."</td>
+    					<td>".$Servicio."</td>
+    					<td>".$fila['costo']."</>
+						<td>".$fila['periodo']."</td>
 						
 	 <td>". 
-		'<form name ="formulario" action="imprimir3.php" method="post">
-		<input name="dani" id="dani" type="tex" readonly= "readonly" value= '.$fila["id"].'> 
-		<input name="aaaa" id="aaaa" type="tex" readonly= "readonly" value= '.$fila["Periodo"].'> 
-		<input type="Submit" name="enviar" value="Cobrar"> </form>'
+		'<form name ="formulario" action="imprimir3.php" onsubmit= "return validar()"method="post" target="_blank">
+		<input name="dani" id="dani" type="tex" readonly= "readonly" value= '.$fila["aid"].'> 
+		<input name="aaaa" id="aaaa" type="tex" readonly= "readonly" value= '.$fila["periodo"].'> 
+		<input name="aa" id="aa" type="tex" readonly= "readonly" value= '.$fila["nombre"].'> 
+		<input type="Submit" name="envia" value="Cobrar"> </form>'
 		."</td>
 		<td>".$tres."</td>
 

@@ -1,5 +1,5 @@
 <?php
-  require 'sesion.php';
+ error_reporting(0);
   ?>
 <!DOCTYPE html>
 <html>
@@ -8,29 +8,43 @@
 </head>
 <body>
     <script src="jquery.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript">
+function validar() {
+
+confirmacion = confirm("Seguro que desea cobrar recibo");
+
+}
+</script>
 <p>
-	
+
 <?php
+
 require 'conexion.php';
 
 $salida = "";
 
-    $query = "SELECT * FROM usersss ORDER By id";
- 
+    $query = "SELECT * FROM datos a INNER JOIN tablapos b on a . id = b . iddd";
+
+
     if (isset($_POST['consulta'])) {
     	$q = $link->real_escape_string($_POST['consulta']);
-    	$query = "SELECT id, Nombre, Domicilio, Servicio, Costo, Periodo FROM usersss WHERE Nombre LIKE '%".$q."%' OR Domicilio LIKE '%".$q."%' OR Servicio LIKE '%".$q."%' OR Costo LIKE '%".$q."%' OR Periodo LIKE '%".$q."%'";
-    }
-$a = 'href="Inicio.php"';
-    $resultado = $link -> query($query);
+		$query = "SELECT * FROM datos a INNER JOIN tablapos b on a . id = b . iddd WHERE nombre LIKE '%".$q."%' OR paterno LIKE '%".$q."%' OR materno LIKE '%".$q."%' OR domicilio LIKE '%".$q."%' OR numero LIKE '%".$q."%' OR costo LIKE '%".$q."%'";
+	}
+
+  $a = 'href="Inicio.php"';
+
+	$resultado = $link -> query($query);
  
     if ($resultado->num_rows > 0) { 
-    	$salida.="<table border=0 class='tabla_datos'>
+
+		$salida.="<table border=0 class='tabla_datos'>
     			<thead>
     				<tr>
                         <th>ID</th>
     					<th>Nombre</th>
+    					<th>Paterno</th>
+    					<th>Materno</th>
     					<th>Domicilio</th>
     					<th>Servicio</th>
     					<th>Costo</th>
@@ -44,20 +58,24 @@ $a = 'href="Inicio.php"';
     	while ($fila = $resultado->fetch_assoc()) {
 
     		$salida.="<tr>
-                        <td>".$fila['id']."</td>
-    					<td>".$fila['Nombre']."</td>
-    					<td>".$fila['Domicilio']."</td>
-    					<td>".$fila['Servicio']."</td>
-    					<td>".$fila['Costo']."</td>
-						<td>".$fila['Periodo']."</td>
+                        <td>".$fila['idd']."</td>
+    					<td>".$fila['nombre']."</td>
+    					<td>".$fila['paterno']."</td>
+    					<td>".$fila['materno']."</td>
+    					<td>".$fila['domicilio']."</td>
+    					<td>".'Pospago'."</td>
+    					<td>".$fila['costo']."</td>
+						<td>".$fila['periodo']."</td>
 						
-	 <td>".'<form name ="formulario" action="Cobro.php" method="post"> 
-	 <input name="dani" id="dani" type="tex" readonly= "readonly" value= '.$fila["id"].'> 
-	 <input type="Submit" name="enviar" value="Cobrar"></form>'."</td>
+	 <td>".'<form name ="formulario" action= "Cobro.php" onsubmit= "return validar()"method="post"  target="_blank"> 
+	 <input name="dani" id="dani" type="tex" readonly= "readonly" value= '.$fila["idd"].'> 
+	 <input name="dan" id="dan" type="tex" readonly= "readonly" value= '.$fila["periodo"].'> 
+	 <input name="da" id="da" type="tex" readonly= "readonly" value= '.$fila["nombre"].'> 
+	 <input type="Submit" name="envia" value="Cobrar"></form>'."</td>
 
     				</tr>";
+		}
 
-    	}
      	$salida.="</tbody></table>";
     }else{
     	$salida.="No se encontro el cliente";

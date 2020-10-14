@@ -62,8 +62,9 @@ function Footer()
 }
 }
 $dani=$_POST['dani'];
+$aga=$_POST['aaaa'];
 $id=$dani;
-$consulta = "SELECT * FROM prepago where id = '$id'";
+$consulta = "SELECT * FROM datoss a INNER JOIN datt b on a . id = b . aid where aid = '$id' and periodo = '$aga'";
 $resultado = mysqli_query($link, $consulta);
 
 $pdf = new PDF();
@@ -78,24 +79,25 @@ $pdf->Line(10,57,200,57);
  {
 
  $extraido['id'];
- $extraido['Nombre'];
- $extraido['Domicilio'];
- $extraido['Numero'];
- $extraido['Servicio'];
- $extraido['Costo'];
- $extraido['Periodo'];
- $Nombre=$extraido['Nombre'];
- $Domicilio=$extraido['Domicilio'];
- $Numero=$extraido['Numero'];
- $Servicio=$extraido['Servicio'];  
- $Costo=$extraido['Costo'];
- $Periodo=$extraido['Periodo'];	
+ $extraido['nombre'];
+ $extraido['domicilio'];
+ $extraido['numero'];
+ $extraido['costo'];
+ $extraido['periodo'];
+ $Nombre=$extraido['nombre'];
+ $paterno=$extraido['paterno'];
+$materno=$extraido['materno'];
+ $Domicilio=$extraido['domicilio'];
+ $Numero=$extraido['numero'];
+ $Servicio= "Pre pago";  
+ $Costo=$extraido['costo'];
+ $Periodo=$extraido['periodo'];	
 
- $dan = $Costo=$extraido['Costo'];
+ $dan = $Costo=$extraido['costo'];
 
- $fecha1 = $extraido['Periodo'];
+ $fecha1 = $extraido['periodo'];
 
- $extraid = $extraido['Costo'];
+ $extraid = $extraido['costo'];
  date_default_timezone_set('America/Mexico_City');
  $fech = date("Y-m-d");
 
@@ -111,7 +113,7 @@ $pdf->Line(10,57,200,57);
  $fec = strtotime ( '+1 month',strtotime ( $fech ) ) ;
  $fec = date ('Y-m-d' , $fec);
  
- $primero = $extraido['Periodo'];
+ $primero = $extraido['periodo'];
  $segundo = strtotime ( '+1 month',strtotime ( $primero ) ) ;
  $segundo = date ('Y-m-d' , $segundo);
  } else {
@@ -126,7 +128,7 @@ $fe = $fecha1;
  $fec = strtotime ( '+1 month',strtotime ( $fech ) ) ;
  $fec = date ('Y-m-d' , $fec);
  
- $primero = $extraido['Periodo'];
+ $primero = $extraido['periodo'];
  $segundo = strtotime ( '+1 month',strtotime ( $primero ) ) ;
  $segundo = date ('Y-m-d' , $segundo);
  } 
@@ -160,11 +162,11 @@ $pdf->Ln(8);
    $pdf->SetFont('Arial','B',10);
      $pdf->SetTextColor(0,0,0);
    $pdf->Cell(5);
-   $pdf->Cell(30,10, $extraido['Nombre'], 0 , 0 , 'I' , 0);
+   $pdf->Cell(30,10, "$Nombre $paterno $materno", 0 , 0 , 'I' , 0);
 
    $pdf->SetFont('Arial','B',10);
    $pdf->Cell(40);
-$pdf->Cell(40,10, $extraido['Servicio'], 0 , 0 , 'C' , 0);
+$pdf->Cell(40,10, 'Pre pago', 0 , 0 , 'C' , 0);
 
    $pdf->SetFont('Arial','B',8);
    $pdf->Cell(20);
@@ -192,7 +194,7 @@ $pdf->Cell(12,10, $fecha2, 0 , 0 , 'D' , 0);
      $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','B',9);
     $pdf->Cell(5);
-$pdf->Cell(30,10, $extraido['Domicilio'], 0 , 0 , 'I' , 0);
+$pdf->Cell(30,10, $extraido['domicilio'], 0 , 0 , 'I' , 0);
 
    $pdf->SetFont('Arial','B',10);
    $pdf->Cell(52);
@@ -218,7 +220,10 @@ $pdf->Cell(1,10,"$ $dan", 0 , 0 , 'D' , 0);
 
 $pdf->Ln(40);
 
-mysqli_query($link,"UPDATE prepago set Nombre='$Nombre', Domicilio='$Domicilio', Numero='$Numero', Servicio='$Servicio', Costo='$Costo', Periodo='$fecha2' where id='$id'");
+mysqli_query($link,"UPDATE datoss set nombre='$Nombre', domicilio='$Domicilio', numero='$Numero', costo='$Costo' where id='$id'");
+mysqli_query($link,"UPDATE datt set periodo='$fecha2' where aid='$id'");
+
+mysqli_query($link,"INSERT INTO registros (3id, 2idd, ida, periodo) VALUES('$id','$id','$fecha1','$fecha2')");
 
 }
 

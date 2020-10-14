@@ -12,6 +12,8 @@
 <script type="text/javascript">
 function validar() {
 	var Nombre = document.forms['formulario']['Nombre'].value;
+	var Nombre = document.forms['formulario']['paterno'].value;
+	var Nombre = document.forms['formulario']['materno'].value;
 	var Domicilio = document.forms['formulario']['Domicilio'].value;
 	var Servicio = document.forms['formulario']['Servicio'].value;
 	var Costo = document.forms['formulario']['Costo'].value;
@@ -36,11 +38,15 @@ if (Periodo == "") {mensaje += "El campo 5 esta vacio\n";}
 </script>
 <center>
 <form REQUIRED name ="formulario" action="signu.php" onsubmit= "return validar()"method="post">
-	<label>Nombre completo</label>
-<input REQUIRED name="Nombre" type="text" maxlength="100" placeholder="Nombre completo " minlength="10">
+	<label>Nombre o Nombres</label>
+<input REQUIRED name="Nombre" type="text" maxlength="100" placeholder="Nombre o Nombres " minlength="1">
+<label>Apellido paterno</label>
+<input REQUIRED name="paterno" type="text" maxlength="100" placeholder="Apellido paterno" minlength="1">
+<label>Apellido materno</label>
+<input REQUIRED name="materno" type="text" maxlength="100" placeholder="Apellido materno" minlength="1">
 <label>Domicilio</label>
 <input REQUIRED name="Domicilio" type="text" maxlength="200" placeholder="Domicilio completo">
-<label>Numero</label>
+<label>Número</label>
 <input REQUIRED name="Numero" type="text" maxlength="10" placeholder="Numero">
 <label>Tipo de servicio</label>
 <div class="aa">
@@ -51,7 +57,7 @@ if (Periodo == "") {mensaje += "El campo 5 esta vacio\n";}
 </div>
 <label>Costo mensual</label>
 <input REQUIRED type="text" name="Costo" maxlength="10" placeholder="$ Costo" min="50" pattern="[0-9]+">
-<label>Dia Mes y Año</label>
+<label>Fecha de cobro</label>
 <input REQUIRED name="Periodo" type="date" placeholder="Fecha de cortes" min="2020-01-01">
 <input type="Submit" value="Enviar">
 

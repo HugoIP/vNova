@@ -62,12 +62,8 @@ function Footer()
     // Número de página
 }
 }
-$daniel=$_POST['costo'];
-$dan=$_POST['dan'];
-$id=$dan;
-$dani=$daniel;
-$consulta = "SELECT * FROM usersss where id = '$id'";
-$resultado = mysqli_query($link, $consulta);
+
+
 
 $pdf = new PDF();
 $pdf->AddPage();
@@ -76,23 +72,42 @@ $pdf->SetFont('Arial','B',16);
 $pdf->SetDrawColor(0,0,0);
 $pdf->SetLineWidth(1);
 $pdf->Line(10,57,200,57);
- 
-while ($extraido=mysqli_fetch_array($resultado)) 
+
+$daniel=$_POST['costo'];
+$dan=$_POST['dan'];
+$daa=$_POST['daa'];
+
+$dani=$daniel;
+$informa=$_POST['informa'];
+//echo $daniel;
+//echo $dan;
+//echo $da;
+
+
+//$consulta = "SELECT * FROM usersss where id = '$id'";
+$query = "SELECT * FROM datos a INNER JOIN tablapos b on a . id = b . iddd";
+
+$consulta = mysqli_query($link,"SELECT * FROM datos a INNER JOIN tablapos b on a . id = b . iddd WHERE idd = '$daa' and periodo = '$dan'") or die ("<h2>Error de ver datos </h2>");
+
+while ($extraido = mysqli_fetch_array($consulta))
 {
-
 $extraido['id'];
-$extraido['Nombre'];
-$extraido['Domicilio'];
-$extraido['Servicio'];
-$extraido['Costo'];
-$extraido['Periodo'];
-$Nombre=$extraido['Nombre'];
-$Domicilio=$extraido['Domicilio'];
-$Servicio=$extraido['Servicio'];  
-$Costo=$extraido['Costo'];
-$Periodo=$extraido['Periodo'];	
+$enviar = $extraido['id'];
 
-$fecha1 = $extraido['Periodo'];
+$extraido['nombre'];
+$extraido['domicilio'];
+
+$extraido['costo'];
+$extraido['periodo'];
+$Nombre=$extraido['nombre'];
+$paterno=$extraido['paterno'];
+$materno=$extraido['materno'];
+$Domicilio=$extraido['domicilio'];
+$Servicio="Pospago";  
+$Costo=$extraido['costo'];
+$Periodo=$extraido['periodo'];	
+
+$fecha1 = $extraido['periodo'];
 $fecha2 = strtotime ( '-1 month',strtotime ( $fecha1 ) ) ;
 $fecha2 = date ('Y-m-d' , $fecha2);
 
@@ -100,7 +115,7 @@ $date1 = date_create($fecha2);
 $date2 = date_create($fecha1);
 $diff = $date1->diff($date2);
 
-$extraid = $extraido['Costo'];
+$extraid = $extraido['costo'];
 
 $total = $dani - $extraid;
 
@@ -114,7 +129,7 @@ $total = $dani - $extraid;
     $pdf->SetFont('Arial','B',13);
     $pdf->Cell(12);
    $pdf->Cell(50,7,'Cobro actual',0,0,'C',True);
-$pdf->Ln(8);  
+ $pdf->Ln(8);  
 
     $pdf->SetFont('Arial','B',12);
      $pdf->SetTextColor(128);
@@ -126,22 +141,22 @@ $pdf->Ln(8);
    $pdf->Cell(25);
    $pdf->Cell(30,10, 'Periodo de cobro', 0 , 0 , 'D' , 0);
 
-$pdf->Ln(8);
+ $pdf->Ln(8);
 
    $pdf->SetFont('Arial','B',10);
      $pdf->SetTextColor(0,0,0);
    $pdf->Cell(5);
-   $pdf->Cell(30,10, $extraido['Nombre'], 0 , 0 , 'I' , 0);
+   $pdf->Cell(30,10, "$Nombre $paterno $materno", 0 , 0 , 'I' , 0);
 
    $pdf->SetFont('Arial','B',10);
    $pdf->Cell(40);
-$pdf->Cell(40,10, $extraido['Servicio'], 0 , 0 , 'C' , 0);
+$pdf->Cell(40,10, $Servicio, 0 , 0 , 'C' , 0);
 
    $pdf->SetFont('Arial','B',8);
    $pdf->Cell(20);
 $pdf->Cell(15,10, $fecha2, 0 , 0 , 'D' , 0);
 $pdf->Cell(3,10, ' - ', 0 , 0 , 'D' , 0);
-$pdf->Cell(12,10, $extraido['Periodo'], 0 , 0 , 'D' , 0);
+$pdf->Cell(12,10, $extraido['periodo'], 0 , 0 , 'D' , 0);
 
    $pdf->Ln(9);
 
@@ -163,7 +178,7 @@ $pdf->Cell(12,10, $extraido['Periodo'], 0 , 0 , 'D' , 0);
      $pdf->SetTextColor(0,0,0);
     $pdf->SetFont('Arial','B',9);
     $pdf->Cell(5);
-$pdf->Cell(30,10, $extraido['Domicilio'], 0 , 0 , 'I' , 0);
+$pdf->Cell(30,10, $extraido['domicilio'], 0 , 0 , 'I' , 0);
 
    $pdf->SetFont('Arial','B',10);
    $pdf->Cell(52);
@@ -200,6 +215,13 @@ $pdf->Cell(2,10,"$ $dani", 0 , 0 , 'D' , 0);
 
 $pdf->Ln(40);
 
+date_default_timezone_set('America/Mexico_City');
+$fech = date("Y-m-d");
+
+mysqli_query($link,"INSERT INTO registro (3id, 2idd, ida,cost, periodo) VALUES('$daa','$enviar','$fech','$dani','$Periodo')");
+mysqli_query($link,"INSERT INTO informacion (1idd, informa, periodo) VALUES('$daa','$informa','$Periodo')");
+
+mysqli_query($link,"DELETE from tablapos where idd= '$daa' and periodo = '$dan'");
 }
 
 $pdf->SetFont('Arial','',6);
@@ -231,12 +253,7 @@ $pdf->Line(25,170,170,170);
 
 $pdf->Output();
 
-date_default_timezone_set('America/Mexico_City');
-$fech = date("Y-m-d");
 
-mysqli_query($link,"INSERT INTO userssss (id, Nombre, Domicilio, Servicio, cost, Costo, Periodo) VALUES('$fech','$Nombre','$Domicilio','$Servicio','$extraid','$dani','$Periodo')");
-
-mysqli_query($link,"DELETE from usersss where id= '$id'") 
 
 
 ?>

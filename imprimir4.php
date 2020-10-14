@@ -68,13 +68,12 @@ function Footer()
 }
 $dani=$_POST['dani'];
 $aaaa=$_POST['aaaa'];
-$dan=$_POST['dan'];
+$are=$_POST['are'];
 
 $id = $dani;
 $periodo = $aaaa;
-$feli = $dan;
 
-$consulta = "SELECT * FROM datos a INNER JOIN registro b on a . id = b . 2idd where id = '$id' AND cost = '$feli' AND periodo = '$aaaa'";
+$consulta = "SELECT * FROM datoss a INNER JOIN registros b on a . id = b . 2idd where id = '$are' AND 2id = '$id' AND periodo = '$aaaa'";
 
 $resultado = mysqli_query($link, $consulta);
 
@@ -91,27 +90,20 @@ while ($extraido=mysqli_fetch_array($resultado))
 
 $extraido['id'];
 $extraido['nombre'];
+$extraido['domicilio'];
 $extraido['paterno'];
 $extraido['materno'];
-$extraido['domicilio'];
-$extraido['3id'];
-$aaid = $extraido['3id'];
-$extraido['cost'];
 $extraido['costo'];
 
 $extraido['periodo'];
 $Nombre=$extraido['nombre'];
 $paterno=$extraido['paterno'];
 $materno=$extraido['materno'];
-$fel=$Nombre;
 $Domicilio=$extraido['domicilio'];
-$Servicio= "Pospago";
-$Cost=$extraido['cost'];
+$Servicio="Pre pago";  
 $Costo=$extraido['costo'];
 
 $Periodo=$extraido['periodo'];	
-
-$extraid = $extraido['cost'];
 
 $danie=$extraido['costo'];
 $fecha1 = $extraido['periodo'];
@@ -148,7 +140,7 @@ $pdf->Ln(8);
    $pdf->SetFont('Arial','B',10);
      $pdf->SetTextColor(0,0,0);
    $pdf->Cell(5);
-   $pdf->Cell(30,10, "$Nombre $paterno $materno", 0 , 0 , 'I' , 0);
+   $pdf->Cell(30,10,"$Nombre $paterno $materno", 0 , 0 , 'I' , 0);
 
    $pdf->SetFont('Arial','B',10);
    $pdf->Cell(40);
@@ -184,7 +176,7 @@ $pdf->Cell(30,10, $extraido['domicilio'], 0 , 0 , 'I' , 0);
 
    $pdf->SetFont('Arial','B',10);
    $pdf->Cell(52);
-$pdf->Cell(10,10, "$ $extraid", 0 , 0 , 'C' , 0);
+$pdf->Cell(10,10, "$ $Costo", 0 , 0 , 'C' , 0);
 
    $pdf->SetFont('Arial','B',10);
     $pdf->Cell(35);
@@ -203,26 +195,14 @@ $pdf->Ln(12);
     $pdf->Cell(2);
 $pdf->Cell(2,10,"$ $danie", 0 , 0 , 'D' , 0);
 
-$pdf->Ln(34);
+$pdf->Ln(4);
 
-$consult = "SELECT * FROM informacion where 1idd = '$aaid' AND periodo = '$aaaa'";
-$resultad = mysqli_query($link, $consult);
-while ($extraid=mysqli_fetch_array($resultad)) 
-{
 
-$extraid['informa'];
-$ee = $extraid['informa'];
 
-$pdf->SetFont('Arial','',10);
-$pdf->SetTextColor(0,0,0);
-    $pdf->Cell(13);
-$pdf->Cell(110,3,utf8_decode("Nota: $ee"), 0 , 1 , 'I' , 0);
-$pdf->Ln(-7);
+$pdf->Ln(40);
 
 }
 
-}
-$pdf->Ln(13);
 $pdf->SetFont('Arial','',6);
 $pdf->SetTextColor(0,0,0);
     $pdf->Cell(20);
