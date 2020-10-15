@@ -1,6 +1,5 @@
 <?php
   require 'database.php';
-  require 'sesion.php';
   ?>
 
 <?php
@@ -43,8 +42,8 @@
   <label>Ingrese email o nombre de usuario</label>
       <input REQUIRED name="email" type="text" placeholder="Email o Usuario">
     </br>
-  <label>Ingrese contraceña</label>
-      <input REQUIRED id="password" name="password" type="password" placeholder="Ingrese contraceña" maxlength="20" minlength="8" ">
+  <label>Ingrese contraseña</label>
+      <input REQUIRED id="password" name="password" type="password" placeholder="Ingrese contraseña" maxlength="20" minlength="8" ">
       <input type="submit" value="Enviar">
     </form>
     <ul class="menuuuu">

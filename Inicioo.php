@@ -5,41 +5,53 @@
 
 require 'conexion.php';
 
-$registro = "SELECT * FROM userss";
+$registro = "SELECT * FROM datos";
 $re = mysqli_query($link, $registro);
 if (mysqli_num_rows($re)>0) {
-while ($extraido=mysqli_fetch_array($re)) 
+while ($extraido=mysqli_fetch_array($re))
 {
-$extraido['id'];
-$extraido['Nombre'];
-$extraido['Domicilio'];
-$extraido['Numero'];
-$extraido['Servicio'];
-$extraido['Costo'];
-$extraido['Periodo'];
-$Nombre=$extraido['Nombre'];
-$Domicilio=$extraido['Domicilio'];
-$Numero=$extraido['Numero'];
-$Servicio=$extraido['Servicio'];  
-$Costo=$extraido['Costo'];
-$Periodo=$extraido['Periodo'];
 
-$fecha1 = $extraido['Periodo'];
+$extraido['id'];
+$id=$extraido['id'];
+
+$quer = mysqli_query($link,"SELECT * FROM dat where id = '$id'");
+$extraid = mysqli_fetch_array($quer);
+
+$extraido['nombre'];
+$extraido['paterno'];
+$extraido['materno'];
+$extraido['domicilio'];
+$extraido['numero'];
+$extraido['costo'];
+$extraid['periodo'];
+$Nombre=$extraido['nombre'];
+$Paterno=$extraido['paterno'];
+$Materno=$extraido['materno'];
+$Domicilio=$extraido['domicilio'];
+$Numero=$extraido['numero'];
+$Servicio= "Pospago";  
+$Costo=$extraido['costo'];
+$Periodo=$extraid['periodo'];
+
+$fecha1 = $extraid['periodo'];
 $fecha2 = strtotime ( '+1 month',strtotime ( $fecha1 ) ) ;
 $fecha2 = date ('Y-m-d' , $fecha2);
 
 date_default_timezone_set('America/Mexico_City');
 $actual = date("Y-m-d");
 if ($actual >= $fecha1) {
-$contenido = "Nombre del cliente: " .$Nombre . "\n Domicilio: ".$Domicilio."\n Numero: ".$Numero."\n Tipo de Servicio: ".$Servicio."\n Costo: ".$Costo."\n Fecha de pago: ".$Periodo;
+$contenido = "Nombre del cliente: " .$Nombre." ".$Paterno." ".$Materno . "\n Domicilio: ".$Domicilio."\n Numero: ".$Numero."\n Tipo de Servicio: ".$Servicio."\n Costo: ".$Costo."\n Fecha de pago: ".$Periodo;
 mail("dannn-pl@hotmail.com", "Recordatorio se genero recibo",$contenido);  
-mysqli_query($link,"UPDATE userss set Periodo='$fecha2' where Nombre='$Nombre'  ");
-mysqli_query($link,"INSERT INTO usersss (Nombre, Domicilio, Numero, Servicio, Costo, Periodo) VALUES('$Nombre','$Domicilio','$Numero','$Servicio','$Costo','$Periodo')");
-	 }
+mysqli_query($link,"UPDATE dat set periodo='$fecha2' where id ='$id'");
+
+mysqli_query($link,"INSERT INTO tablapos (iddd, periodo) VALUES('$id','$Periodo')");
+
+}
 	}
   }
 mysqli_close($link);
-
+//mysqli_query($link,"UPDATE dat set periodo='$fecha2' where id ='$id'");
+//mysqli_query($link,"INSERT INTO tablapos (iddd, periodo) VALUES('$id','$Periodo')");
 //mysqli_query($link,"INSERT INTO usersss (Nombre, Domicilio, Servicio, Costo, Periodo) VALUES('$Nombre','$Domicilio','$Servicio','$Costo','$Periodo')");
 
 ?>
@@ -69,16 +81,12 @@ $("#principal").load(pagina);
 </header>
 <body> 
 	<header>
-
-<ul class="menu">
-<li><a href="Cobro21.html">Cobrar Servicio</a></li>
-
-	<li><a href="Cobro2221.html">Prepago</a></li>
+	 <ul class="menuuu">
+	<li><a href="Cobro21.html">Cobrar Pospago</a></li>
+	<li><a href="Cobro2221.html">Cobrar Prepago</a></li>
 </ul>
 
-
 </header>
-
 
 </body>
 </html>

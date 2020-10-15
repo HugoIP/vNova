@@ -1,5 +1,6 @@
 <?php
 session_start();
-$_SESSION['usuario'] = 'danie';
+$daaa = $_SESSION['usuari'];
+$da = $_SESSION['usu'];
 header("Location: Inicioo.php")
 ?>

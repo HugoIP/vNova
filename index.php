@@ -1,4 +1,22 @@
 <?php
+error_reporting(0);
+  session_start();
+  $daaa = $_SESSION['usuari'];
+  $var = $daaa;
+  $daniel = 'daniel';
+  $monica = 'monica';
+  $hugo = 'hugo'; 
+  $alma = 'alma';
+  if ($daniel === $var || $monica === $var || $hugo === $var|| $alma === $var) {
+  header("Location: validar.php");
+} else if ($var == null || $var=''){
+  }else{
+  header("Location: validar2.php");
+  }
+  date_default_timezone_set('America/Mexico_City');
+  $entrad = date("g:i:s a");
+  date_default_timezone_set('America/Mexico_City');
+  $entrada = date("Y-m-d H:i:s");
   require 'database.php';
   if (!empty($_POST['email']) && !empty($_POST['password'])) {
     $records = $conn->prepare('SELECT id, email, password FROM users WHERE email = :email');
@@ -15,11 +33,22 @@
       $daniel = 'daniel';
       $monica = 'monica';
       $hugo = 'hugo';
-
-      if ($daniel === $email || $monica === $email || $hugo === $email) {
-      header("Location: validar.php");
-
-      } else {
+      $alma = 'alma';
+      if ($daniel === $email || $monica === $email || $hugo === $email || $alma === $email) {
+        $link = mysqli_connect("localhost","root","daniel") or die("<h2>Nose encuantra el servidor</h2>");
+$db = mysqli_select_db($link,"database") or die ("<h2>Error de conexion</h2>");
+mysqli_query($link,"INSERT INTO uno (nombre, entrada) VALUES('$email','$entrada')");
+        session_start();
+        $_SESSION['usuari'] = $email;      
+        $_SESSION['usu'] = $entrada; 
+        header("Location: validar.php");
+   } else {
+    $link = mysqli_connect("localhost","root","daniel") or die("<h2>Nose encuantra el servidor</h2>");
+    $db = mysqli_select_db($link,"database") or die ("<h2>Error de conexion</h2>");
+mysqli_query($link,"INSERT INTO uno (nombre, entrada) VALUES('$email','$entrada')");
+    session_start();
+    $_SESSION['usuari'] = $email;  
+    $_SESSION['usu'] = $entrada; 
       header("Location: validar2.php");
       }
     } else {
@@ -61,7 +90,8 @@ crossorigin="anonymous"></script>
        <label>Ingrese contraseña</label>
       <input REQUIRED name="password" type="password" placeholder=" Contraseña">
       <br/>
-      <input type="submit" value="Entrar">
+      <input type="submit" value="Entrar">      <br/>
+     Hora: <?php echo $entrad?>
     </form>
 
 <script>

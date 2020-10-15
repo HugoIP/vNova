@@ -1,34 +1,45 @@
  html {
    position: relative;
-  min-height: 90%;
+   min-height: 90%;
 	background: #e8e8e8;
  }
 
  .menu{
 	list-style: none;
-	padding: 0;
+	padding: 1;
 	background: #310606;
-	width: 90%;
+	width: 99%;
 	max-width: 1000px;
 	margin: auto;
  }
-
+  .menu li{
+	display: inline-block;
+	min-width: 140px;
+ }
  .menu li a{
 	text-decoration: none;
 	color: white;
-	padding: 15px;
+	padding: 10px 10px;
 	display: block;
  }
-
- .menu li{
-	display: inline-block;
-	text-align: center;
- }
-
  .menu li a:hover{
 	background: rgb(240, 138, 138) ;
  }
+ .des{
+display: none;
+position: absolute;
+background: #310606;
+width: 90%;
+	padding: 10px 6px;
+		min-width: 160px;
+		text-align: left;
+}
 
+.menu :hover .des  {
+	display: block;
+	text-decoration: none;
+	float: left;
+ }
 
  .menuu{
 	list-style: none;
@@ -57,8 +68,62 @@
  .menuu li a:hover{
 	background: #f35c5c;
  }
+ .paginador ul{
 
+	list-style: none;
+	background: #FFF;
+	margin-top: 1px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: flex-end;
+	width: 90%;
+}
+.paginador ul li a{
+	background: rgb(236, 205, 205);
+}
+.paginador a, .pageSelected{
+	color: #428bca;
+	border: 1px solid #ddd;
+	padding: 8px 12px;
+	display: inline-block;
+	font-size: 15px;
+	text-align: center;
+	width: 30px;
+}
+.paginador a:hover{
+	background: rgb(14, 245, 6);
+}
+.paginado ul{
 
+	list-style: none;
+	background: #FFF;
+	margin-top: 1px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: flex-end;
+	width: 70%;
+}
+.paginado ul li a{
+	background: rgb(236, 205, 205);
+}
+.paginado a, .pageSelected{
+	color: #428bca;
+	border: 1px solid #ddd;
+	padding: 8px 12px;
+	display: inline-block;
+	font-size: 15px;
+	text-align: center;
+	width: 30px;
+}
+.paginado a:hover{
+	background: rgb(14, 245, 6);
+}
  .menuuu{
 	list-style: none;
 	padding: 0;
@@ -71,7 +136,7 @@
  .menuuu li a{
 	text-decoration: none;
 	color: white;
-	padding: 15px;
+	padding: 15px 3px;
 	display: block;
 	max-width: 250px;
 	text-align: center;	
@@ -128,7 +193,7 @@ body{
 
 
  h1{
- 	font-size: 45px;
+ 	font-size: 35px;
 text-align: center;
 padding: 10px;
  }
@@ -155,7 +220,6 @@ padding: 10px;
     h5{
  	font-size: 25px;
 padding: 10px;
-background: yellow;
 width: 20%;
  }
      h6{
@@ -168,20 +232,19 @@ table {
 	font-family: Arial;
 	background-color: white;
 	text-align: left;
-	width: 80% 
-	
+	width: 90%;
 }
 th, td{
-	padding: 20px;
+	padding: 4px 8px;
 
 }
 th{
 	background-color: #275a4f; 
 	color: white;
-	font-size: 20px;
+	font-size: 16px;
 }
 tr{
-	font-size: 20px;
+	font-size: 15px;
 }
 tr:nth-child(even){
 	background-color: #ddd;
@@ -228,6 +291,23 @@ input[type="text"], input[type="password"],input[type="number"],input[type="date
 font-family: Arial;
 font-size: 20px;
 }
+input[idd="Pere"]{
+	outline: none;
+	padding: 8px;
+	display: block;
+	width: 300px;
+	border-radius: 3px;
+	border: 5px solid #eee;
+	margin: 5px auto;
+  font-family: Arial;
+  font-size: 18px;
+  }
+  label [type="id"]{
+	font-size: 5px;
+	display: block;
+	padding: 2px;
+	font-family: Arial;
+}
 input[type="submit"]{
   padding: 12px;
   color: #fff;
@@ -241,7 +321,7 @@ input[type="submit"]{
   font-family: Arial;
   font-size: 15px;
 }
-input[name="enviar"]{
+input[name="envia"]{
 	padding: 5px;
 	color: #fff;
 	background: #0098cb;
@@ -252,7 +332,33 @@ input[name="enviar"]{
 	border-radius: 3px;
 	cursor: pointer;
 	font-family: Arial;
-	font-size: 15px;
+	font-size: 14px;
+  }
+  input[name="enviar"]{
+	padding: 5px;
+	color: #fff;
+	background: #0098cb;
+	width: 80px;
+	margin: 10px auto;
+	margin-top: 0;
+	border: 8;
+	border-radius: 3px;
+	cursor: pointer;
+	font-family: Arial;
+	font-size: 12px;
+  }
+  input[name="envi"]{
+	padding: 5px;
+	color: #fff;
+	background: #d40707;
+	width: 80px;
+	margin: 10px auto;
+	margin-top: 0;
+	border: 8;
+	border-radius: 3px;
+	cursor: pointer;
+	font-family: Arial;
+	font-size: 12px;
   }
 input[type="color"]{
 	padding: 2px;
